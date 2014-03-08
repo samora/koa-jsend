@@ -1,6 +1,6 @@
 {
   "name": "koa-jsend",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Simple and structured application level JSON responses for Koa based on JSend specification.",
   "main": "index.js",
   "repository": {
