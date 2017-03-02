@@ -11,27 +11,26 @@ npm install --save koa-jsend
 In your [koa](http://koajs.com) app.
 
 ```javascript
-var koa = require('koa')
+var Koa = require('koa')
   , jsend = require('koa-jsend')
   ;
 
-var app = koa();
+var app = new Koa();
 
 app.use(jsend());
 ```
 
 ## API
 
-Instead of using `this.body=` to send JSON responses, use one of the functions in `this`.
-Where `this` is the koa context, `ctx`.
+Instead of using `ctx.body=` to send JSON responses, use one of the functions in `ctx`.
 
 ### `ctx.success(data)`
 
 * __data__: _Optional_ response data.
 
 ```javascript
-app.use(function *(){
-  this.success({
+app.use(async function (ctx, next){
+  ctx.success({
     name: 'Samora',
     sex: 'Male',
     nationality: 'Ghanaian'
@@ -54,8 +53,8 @@ app.use(function *(){
 * __errors__: _Required_ error(s) data.
 
 ```javascript
-app.use(function *(){
-  this.fail({
+app.use(async function (ctx, next){
+  ctx.fail({
     name: 'Name is required.'
   });
 });
@@ -76,8 +75,8 @@ app.use(function *(){
 * __code__: _Optional_ error code.
 
 ```javascript
-app.use(function *(){
-  this.error('Something went wrong.', null, 8);
+app.use(async function (ctx, next){
+  ctx.error('Something went wrong.', null, 8);
 });
 
 // JSON response
@@ -98,8 +97,8 @@ Sends a `ctx.error` response if `err` is passed.
 * __code__: _Optional_
 
 ```javascript
-app.use(function *(){
-  this.jsend(null, {
+app.use(async function (ctx, next){
+  ctx.jsend(null, {
     name: 'Samora',
     sex: 'Male',
     nationality: 'Ghanaian'
@@ -119,8 +118,8 @@ app.use(function *(){
 
 
 ```javascript
-app.use(function *(){
-  this.jsend(Error('Something went wrong.'));
+app.use(async function (ctx, next){
+  ctx.jsend(Error('Something went wrong.'));
 });
 
 // JSON response
